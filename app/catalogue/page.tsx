@@ -3,7 +3,7 @@ import Search from '@/app/ui/Search';
 import { lusitana } from '@/app/ui/fonts';
 import CategoriesMenu from '@/app/ui/CategoriesMenu';
 import Breadcrumbs from '@/app/ui/Breadcrumbs';
-import Pagination from '../ui/Pagination';
+import Pagination from '@/app/ui/Pagination';
 
 export default async function Page() {
   const categories = await loadCategories();

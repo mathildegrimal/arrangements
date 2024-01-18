@@ -1,6 +1,6 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
-import Header from './ui/header/Header';
+import Header from '@/app/ui/header/Header';
 export default function RootLayout({
   children,
 }: {
