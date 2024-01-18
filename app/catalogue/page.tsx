@@ -1,8 +1,9 @@
-import { loadCategories } from '../lib/data';
-import Breadcrumbs from '../ui/breadcrumbs';
-import Search from '../ui/search';
-import { lusitana } from '../ui/fonts';
-import CategoriesMenu from '../ui/CategoriesMenu';
+import { loadCategories } from '@/app/lib/data';
+import Search from '@/app/ui/Search';
+import { lusitana } from '@/app/ui/fonts';
+import CategoriesMenu from '@/app/ui/CategoriesMenu';
+import Breadcrumbs from '@/app/ui/Breadcrumbs';
+import Pagination from '../ui/Pagination';
 
 export default async function Page() {
   const categories = await loadCategories();
@@ -11,14 +12,17 @@ export default async function Page() {
       <Breadcrumbs breadcrumbs={[{ label: 'Catalogue', href: '/catalogue' }]} />
       <div className="flex flex h-full w-full flex-col gap-10">
         <Search placeholder="Rechercher des morceaux..." />
-        <div className="flex flex flex h-full w-full gap-10">
+        <div className="flex h-full w-full flex-col gap-10 md:flex-row">
           <CategoriesMenu categories={categories} activeCategory="" />
-          <div className="flex flex h-full w-4/5 flex-col">
+          <div className="flex flex h-full flex-col md:w-3/5 lg:w-8/12 xl:w-4/5">
             <h2 className={`${lusitana.className} flex text-xl md:text-2xl`}>
               Morceaux
             </h2>
           </div>
         </div>
+      </div>
+      <div className="mt-5 flex w-full justify-center">
+        <Pagination totalPages={10} />
       </div>
     </main>
   );
