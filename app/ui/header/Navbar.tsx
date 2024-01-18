@@ -53,7 +53,7 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
                       dropdownItems={submenu.sort((a, b) => a.order - b.order)}
                     />
                   ) : (
-                    <Link href={`/${slug}`}>{name}</Link>
+                    <Link href={`${slug}`}>{name}</Link>
                   )}
                 </li>
               ))}
