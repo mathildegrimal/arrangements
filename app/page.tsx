@@ -5,8 +5,8 @@ import { Button } from './ui/Button';
 import { Card } from './ui/Card';
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col gap-10">
-      <div className="mt-16 flex flex-col gap-10 bg-white px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
+    <main className="flex min-h-screen flex-col gap-10 bg-white">
+      <div className="mt-16 flex flex-col gap-10 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
         <div className="flex flex-col gap-6 xl:w-1/2">
           <h1 className={`${lusitana.className} text-2xl font-bold`}>
             Vous faites partie d&apos;une fanfare, une banda, une peña, ou
