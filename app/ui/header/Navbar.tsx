@@ -11,7 +11,7 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <nav className="w-full">
+    <nav className="w-full bg-white">
       <div className="mx-auto justify-between px-4 md:flex md:items-center md:px-8 lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
