@@ -11,3 +11,9 @@ export interface Category {
   order: number;
   slug: string;
 }
+
+export interface Track {
+  author: string;
+  name: string;
+  file: string;
+}

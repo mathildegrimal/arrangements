@@ -1,18 +1,18 @@
 import Link from 'next/link';
 import { lusitana } from './ui/fonts';
 import Image from 'next/image';
+import { Button } from './ui/Button';
+import { Card } from './ui/Card';
 export default function Page() {
   return (
-    <main className="bg-whites flex min-h-screen flex-col bg-white p-24">
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <p
-            className={`${lusitana.className} text-xl text-gray-800 md:text-2xl md:leading-normal`}
-          >
+    <main className="flex min-h-screen flex-col gap-10">
+      <div className="mt-16 flex flex-col gap-10 bg-white px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
+        <div className="flex flex-col gap-6 xl:w-1/2">
+          <h1 className={`${lusitana.className} text-2xl font-bold`}>
             Vous faites partie d&apos;une fanfare, une banda, une peña, ou
             encore une harmonie ?
-            <br />
-            <br />
+          </h1>
+          <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
             Vous cherchez à moderniser et étoffer votre répertoire grâce à de
             nouvelles partitions ? Vous trouverez sur ce site tout ce qu&apos;il
             faut pour vous aider dans cette tache !
@@ -23,18 +23,71 @@ export default function Page() {
             souhaite aider les groupes musicaux à garnir leur répertoire en leur
             faisant profiter de mon expérience.
           </p>
+          <div>
+            <Link href="/catalogue">
+              <Button className="mt-4 w-auto justify-center">
+                Catalogue complet
+              </Button>
+            </Link>
+          </div>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
-          <Image
-            src="/pexels-ylanite-koppens-934067.jpg"
-            width={1000}
-            height={760}
-            className="hidden md:block"
-            alt="partition"
+        <div className="flex flex-col gap-6">
+          <h2 className={`${lusitana.className} text-2xl font-bold`}>
+            Exemples de partitions
+          </h2>
+          <div className="mt-6 flex flex-col gap-10 md:grid md:grid-cols-3">
+            <Card
+              title="Céline Dion - J'irai où tu iras"
+              link={`/`}
+              description={`Partition pour piano`}
+              action="download"
+              image="/pexels-ylanite-koppens-934067.jpg"
+            />
+            <Card
+              title="Générique de Game of Thrones"
+              link={`/`}
+              description={`Partition pour basse`}
+              action="download"
+              image="/pexels-ylanite-koppens-934067.jpg"
+            />
+            <Card
+              title="Johhny - Allumer le feu"
+              link={`/`}
+              description={`Partition pour saxophone`}
+              action="download"
+              image="/pexels-ylanite-koppens-934067.jpg"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="mt-8 flex grow flex-col gap-6 bg-yellow-400 px-6 md:px-16">
+        <h2 className={`${lusitana.className} mt-8 text-2xl font-bold`}>
+          Catégories à la une
+        </h2>
+        <div className="mt-6 flex flex-col gap-10 md:grid md:grid-cols-3">
+          <Card
+            title={'Nouveautés'}
+            link={`/catalogue/variete-internationale`}
+            description={`Retrouvez tous les nouveaux arrangements, comprenant certains tubes du moment.`}
+            action="navigate"
+            image="/pexels-wendy-wei-1540406.jpg"
+          />
+          <Card
+            title={'Variété francophone'}
+            link={`/catalogue/variete-internationale`}
+            description={`Les incontournables de Pierre Bachelet, Yves Montand, JJ Goldman, Johnny, 3 cafés gourmands, Ben l'oncle Soul, Claudio Capeo...`}
+            action="navigate"
+            image="/pexels-jessica-lewis-thepaintedsquare-1010519.jpg"
+          />
+          <Card
+            title={'Bandas / peña'}
+            link={`/catalogue/banda`}
+            description={`Arrangements pour bandas et peñas parmi les plus connus`}
+            action="navigate"
+            image="/pexels-gratisography-566.jpg"
           />
         </div>
       </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row"></div>
     </main>
   );
 }

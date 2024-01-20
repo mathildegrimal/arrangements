@@ -11,17 +11,18 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <nav className="w-full bg-yellow-500 shadow">
+    <nav className="w-full">
       <div className="mx-auto justify-between px-4 md:flex md:items-center md:px-8 lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
             <a href="#" className="flex items-center justify-between gap-2">
-              <GiMusicalNotes className="h-10 w-10 text-white" />
-              <h1
-                className={`${lusitana.className} text-3xl font-bold text-white`}
-              >
-                Ivan Mur - Arrangements musicaux
-              </h1>
+              <GiMusicalNotes className="h-10 w-10 text-red-600" />
+              <div className="flex flex-col">
+                <p className={`${lusitana.className} text-3xl font-bold`}>
+                  Ivan Mur
+                </p>
+                <p className="text-1xl">Arrangements musicaux</p>
+              </div>
             </a>
             <div className="md:hidden">
               <button
@@ -29,9 +30,9 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
                 onClick={() => setNavbar(!navbar)}
               >
                 {navbar ? (
-                  <RxCross1 className="text-white" />
+                  <RxCross1 className="text-red-600" />
                 ) : (
-                  <AiOutlineMenu className="text-white" />
+                  <AiOutlineMenu className="text-red-600" />
                 )}
               </button>
             </div>
@@ -45,16 +46,8 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               {menuItems.map(({ name, slug, submenu }, index) => (
-                <li key={index} className="text-white">
-                  {submenu.length > 0 ? (
-                    <Dropdown
-                      name={name}
-                      slug={slug}
-                      dropdownItems={submenu.sort((a, b) => a.order - b.order)}
-                    />
-                  ) : (
-                    <Link href={`${slug}`}>{name}</Link>
-                  )}
+                <li key={index} className="font-semibold text-red-600">
+                  <Link href={`${slug}`}>{name}</Link>
                 </li>
               ))}
             </ul>

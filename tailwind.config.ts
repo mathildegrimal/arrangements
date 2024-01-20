@@ -17,6 +17,13 @@ const config: Config = {
           500: '#0070F3',
           600: '#2F6FEB',
         },
+        yellow: {
+          400: '#F2EA79',
+          600: '#F2E52E',
+        },
+        red: {
+          600: '#D94A3D',
+        },
       },
     },
     keyframes: {
