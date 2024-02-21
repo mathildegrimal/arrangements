@@ -16,10 +16,10 @@ function parseSongs(category, array) {
   array.map((song) => {
     const splitSong = song.split('(');
     let author = '';
-    if (splitSong[1]) {
+    if (author.length > 0) {
       author = splitSong[1].replace(')', '');
     }
-    result.push({ category, name: splitSong[0], author });
+    result.push({ category, name: song, author });
   });
 
   return result;
@@ -71,50 +71,18 @@ async function seedSongs(client) {
       }),
     );
 
-    console.log(`Seeded ${insertedSongs.length} songs`);
+    console.log(`Seeded ${insertedUsers.length} users`);
 
     return {
       createTable,
-      songs: insertedSongs,
+      users: insertedUsers,
     };
   } catch (error) {
-    console.error('Error seeding songs:', error);
+    console.error('Error seeding users:', error);
     throw error;
   }
 }
 
-function countSongs() {
-  try {
-    const varieteInterSongs = parseSongs(
-      'Variété internationale',
-      varieteInter,
-    );
-    const varieteFrSongs = parseSongs('Variété française', varieteFr);
-    const bandasSong = parseSongs('Banda / Peña', bandas);
-    const diversSongs = parseSongs('Divers', divers);
-    const generiquesSongs = parseSongs('Génériques / Thèmes', generiques);
-    const tradiSongs = parseSongs('Traditionnel / Balkans / Paso doble', tradi);
-    const nouveautesSongs = parseSongs('Nouveautés', nouveautes);
-    const medleySongs = parseSongs('Medleys', medleys);
-
-    // Insert data into the "users" table
-    const insertedSongs = [
-      ...varieteInterSongs,
-      ...varieteFrSongs,
-      ...bandasSong,
-      ...diversSongs,
-      ...generiquesSongs,
-      ...tradiSongs,
-      ...nouveautesSongs,
-      ...medleySongs,
-    ];
-
-    return insertedSongs.length;
-  } catch (error) {
-    console.error('Error seeding songs:', error);
-    throw error;
-  }
-}
 async function main() {
   const client = await db.connect();
 

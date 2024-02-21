@@ -1,7 +1,8 @@
 import { gql } from '@apollo/client';
 import { client } from './client';
-import { Category, MenuItem, Track } from './definitions';
+import { Category, MenuItem, RawTrack, Track } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
+import { QueryResult, sql } from '@vercel/postgres';
 
 export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
   const { data } = await client.query({
@@ -25,6 +26,7 @@ export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
   return data;
 };
 export const loadCategories = async (): Promise<Category[]> => {
+  noStore();
   const { data } = await client.query<{ allCategories: Category[] }>({
     query: gql`
       query {
@@ -41,6 +43,7 @@ export const loadCategories = async (): Promise<Category[]> => {
 };
 
 export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
+  noStore();
   const { data } = await client.query<{ allCategories: Category[] }>({
     query: gql`
       query {
@@ -143,4 +146,87 @@ export async function loadFilteredTracks(
     tracks: filteredTracks.slice(start, end),
     totalPages,
   };
+}
+
+export async function loadTracks({
+  query,
+  currentPage,
+  category,
+}: {
+  query: string;
+  currentPage: number;
+  category?: Category;
+}) {
+  const ITEMS_PER_PAGE = 10;
+
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  noStore();
+  try {
+    let filteredSongs: QueryResult<RawTrack>;
+    let count: QueryResult<{
+      count: string;
+    }>;
+    if (category) {
+      filteredSongs = await sql<RawTrack>`
+      SELECT *
+      FROM songs
+      WHERE category = ${category?.name}
+      ORDER BY name
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      `;
+      count = await sql<{ count: string }>`
+      SELECT COUNT(*)
+      FROM songs WHERE category = ${category?.name}
+      `;
+      if (query) {
+        filteredSongs = await sql<RawTrack>`
+      SELECT *
+      FROM songs
+      WHERE category = ${category?.name}
+      AND (name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`} )
+      ORDER BY name
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      `;
+        count = await sql<{ count: string }>`
+      SELECT COUNT(*)
+      FROM songs  WHERE category = ${category?.name}
+      AND (name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`})
+      `;
+      }
+    } else {
+      filteredSongs = await sql<RawTrack>`
+      SELECT *
+      FROM songs
+      ORDER BY name
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      `;
+      count = await sql<{ count: string }>`
+      SELECT COUNT(*)
+      FROM songs
+      `;
+      if (query) {
+        filteredSongs = await sql<RawTrack>`
+      SELECT *
+      FROM songs
+      WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      ORDER BY name
+      LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
+      `;
+        count = await sql<{ count: string }>`
+      SELECT COUNT(*)
+      FROM songs  WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      `;
+      }
+    }
+
+    // sqlQuerySelect += ` LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}`;
+
+    const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
+
+    return { tracks: filteredSongs.rows, totalPages };
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the tracks.');
+  }
 }

@@ -17,3 +17,9 @@ export interface Track {
   name: string;
   file: string;
 }
+export interface RawTrack {
+  author: string;
+  name: string;
+  category: string;
+  id: string;
+}

@@ -1,8 +1,4 @@
-import {
-  loadCategories,
-  loadCategoryBySlug,
-  loadFilteredTracks,
-} from '@/app/lib/data';
+import { loadCategories, loadCategoryBySlug, loadTracks } from '@/app/lib/data';
 import CategoriesMenu from '@/app/ui/CategoriesMenu';
 import Breadcrumbs from '@/app/ui/Breadcrumbs';
 import { lusitana } from '@/app/ui/fonts';
@@ -23,11 +19,13 @@ export default async function Page({
   const categories = await loadCategories();
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
-  const { tracks, totalPages } = await loadFilteredTracks(query, currentPage);
+  const { tracks, totalPages } = await loadTracks({
+    query,
+    currentPage,
+    category,
+  });
   if (!category) {
     notFound();
-  } else {
-    console.log(category);
   }
   return (
     <main className="flex min-h-screen flex-col bg-white bg-white p-12 md:p-16 lg:p-24">
@@ -41,7 +39,7 @@ export default async function Page({
             <Search placeholder="Rechercher des morceaux..." />
             <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"></thead>
-              <tbody>
+              <tbody className="bg-white">
                 {tracks.map((track, index) => (
                   <Track key={index} {...track} />
                 ))}
