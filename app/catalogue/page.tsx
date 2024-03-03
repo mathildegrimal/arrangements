@@ -1,4 +1,4 @@
-import { loadCategories, loadTracks } from '@/app/lib/data';
+import { loadCategories, loadTrackAudio, loadTracks } from '@/app/lib/data';
 import Search from '@/app/ui/Search';
 import { lusitana } from '@/app/ui/fonts';
 import CategoriesMenu from '@/app/ui/CategoriesMenu';
@@ -18,6 +18,7 @@ export default async function Page({
   const query = searchParams?.query || '';
   const currentPage = Number(searchParams?.page) || 1;
   const { tracks, totalPages } = await loadTracks({ query, currentPage });
+
   return (
     <main className="bg-whites flex h-full min-h-screen flex-col bg-white p-12 md:p-16 lg:p-24">
       <div className="flex flex h-full w-full flex-col gap-10">

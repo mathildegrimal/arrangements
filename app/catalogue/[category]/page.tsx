@@ -1,12 +1,16 @@
-import { loadCategories, loadCategoryBySlug, loadTracks } from '@/app/lib/data';
+import {
+  loadCategories,
+  loadCategoryBySlug,
+  loadTrackAudio,
+  loadTracks,
+} from '@/app/lib/data';
 import CategoriesMenu from '@/app/ui/CategoriesMenu';
-import Breadcrumbs from '@/app/ui/Breadcrumbs';
-import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/Search';
 import { notFound } from 'next/navigation';
 import Pagination from '@/app/ui/Pagination';
-import { Track } from '@/app/ui/Track';
 
+import React from 'react';
+import { Track } from '@/app/ui/Track';
 export default async function Page({
   params,
   searchParams,
@@ -27,6 +31,7 @@ export default async function Page({
   if (!category) {
     notFound();
   }
+
   return (
     <main className="flex min-h-screen flex-col bg-white bg-white p-12 md:p-16 lg:p-24">
       <div className="flex flex h-full w-full flex-col gap-10">

@@ -25,6 +25,7 @@ export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
   });
   return data;
 };
+
 export const loadCategories = async (): Promise<Category[]> => {
   noStore();
   const { data } = await client.query<{ allCategories: Category[] }>({
@@ -42,6 +43,34 @@ export const loadCategories = async (): Promise<Category[]> => {
   return data.allCategories;
 };
 
+export const loadTrackAudio = async (
+  name: string,
+): Promise<{
+  name: string;
+  file: {
+    id: string;
+    url: string;
+  };
+}> => {
+  console.log(`-${name.trim()}-`);
+  const { data } = await client.query<{
+    audio: { name: string; file: { id: string; url: string } };
+  }>({
+    query: gql`
+      query {
+        audio(filter: {name: {matches: {pattern: "${name.trim()}"}}}) {
+          name
+          file {
+            id
+            url
+          }
+        }
+      }
+    `,
+  });
+  return data.audio;
+};
+
 export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
   noStore();
   const { data } = await client.query<{ allCategories: Category[] }>({
@@ -57,96 +86,6 @@ export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
   });
   return data.allCategories[0];
 };
-
-export async function loadFilteredTracks(
-  query: string,
-  currentPage: number,
-  category?: string,
-) {
-  noStore();
-  const ITEMS_PER_PAGE = 10;
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-  const start = (currentPage - 1) * ITEMS_PER_PAGE;
-  const end = currentPage + ITEMS_PER_PAGE;
-  const tracks: Track[] = [
-    {
-      author: 'Céline Dion',
-      name: "J'irai où tu iras",
-      file: '',
-    },
-    {
-      author: 'Johhny Halliday',
-      name: 'Allumer le feu',
-      file: '',
-    },
-    {
-      author: 'Michel Sardou',
-      name: 'Les lacs du Conemara',
-      file: '',
-    },
-    {
-      author: 'Céline Dion',
-      name: "J'irai où tu iras",
-      file: '',
-    },
-    {
-      author: 'Johhny Halliday',
-      name: 'Allumer le feu',
-      file: '',
-    },
-    {
-      author: 'Michel Sardou',
-      name: 'Les lacs du Conemara',
-      file: '',
-    },
-    {
-      author: 'Céline Dion',
-      name: "J'irai où tu iras",
-      file: '',
-    },
-    {
-      author: 'Johhny Halliday',
-      name: 'Allumer le feu',
-      file: '',
-    },
-    {
-      author: 'Michel Sardou',
-      name: 'Les lacs du Conemara',
-      file: '',
-    },
-    {
-      author: 'Céline Dion',
-      name: "J'irai où tu iras",
-      file: '',
-    },
-    {
-      author: 'Johhny Halliday',
-      name: 'Allumer le feu',
-      file: '',
-    },
-    {
-      author: 'Michel Sardou',
-      name: 'Les lacs du Conemara',
-      file: '',
-    },
-  ];
-  let filteredTracks = tracks;
-
-  if (query) {
-    filteredTracks = tracks.filter(
-      (track) =>
-        track.author.toLowerCase().includes(query.toLowerCase()) ||
-        track.name.toLowerCase().includes(query.toLowerCase()),
-    );
-  }
-
-  const totalPages = Math.ceil(filteredTracks.length / ITEMS_PER_PAGE);
-
-  return {
-    tracks: filteredTracks.slice(start, end),
-    totalPages,
-  };
-}
 
 export async function loadTracks({
   query,

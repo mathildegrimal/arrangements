@@ -1,6 +1,15 @@
-import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
+'use server';
+import { loadTrackAudio } from '../lib/data';
+import { AudioButton } from './AudioButton';
 
-export function Track({ author, name }: { author: string; name: string }) {
+export async function Track({
+  author,
+  name,
+}: {
+  author: string;
+  name: string;
+}) {
+  const audio = await loadTrackAudio(name);
   return (
     <tr className="border-b">
       <th
@@ -10,8 +19,13 @@ export function Track({ author, name }: { author: string; name: string }) {
         {name}
       </th>
       <td className="px-6 py-4">{author}</td>
+
       <td className="px-6 py-4">
-        <SpeakerWaveIcon className="h-5 w-5" />
+        {audio && audio.file ? (
+          <AudioButton trackUrl={audio.file.url} />
+        ) : (
+          <></>
+        )}
       </td>
     </tr>
   );

@@ -1,6 +1,9 @@
 import '@/app/ui/global.css';
 import { inter } from '@/app/ui/fonts';
 import Header from '@/app/ui/header/Header';
+import FooterProvider from './provider';
+import Footer from './ui/footer/Footer';
+
 export default function RootLayout({
   children,
 }: {
@@ -9,8 +12,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <Header />
-        {children}
+        <FooterProvider>
+          <Header />
+          {children}
+          <Footer />
+        </FooterProvider>
       </body>
     </html>
   );
