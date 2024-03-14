@@ -5,6 +5,35 @@ export interface MenuItem {
   submenu: Omit<MenuItem, 'submenu'>[];
 }
 
+export interface IndexData {
+  id: string;
+  title: string;
+  text: IndexText[];
+  image: Omit<Image, 'copyright'>;
+}
+
+export interface PartitionsData {
+  title: string;
+  text: string;
+  items: Partition[];
+}
+export interface Partition {
+  id: string;
+  instrument: string;
+  name: string;
+  sheet: Image;
+  preview: Image;
+}
+
+export interface Image {
+  alt: string;
+  copyright: string;
+  url: string;
+}
+export interface IndexText {
+  id: string;
+  item: string;
+}
 export interface Category {
   id: string;
   name: string;

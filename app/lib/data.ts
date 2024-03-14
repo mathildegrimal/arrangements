@@ -1,10 +1,73 @@
 import { gql } from '@apollo/client';
 import { client } from './client';
-import { Category, MenuItem, RawTrack, Track } from './definitions';
+import {
+  Category,
+  IndexData,
+  IndexText,
+  MenuItem,
+  Partition,
+  PartitionsData,
+  RawTrack,
+  Track,
+} from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { QueryResult, sql } from '@vercel/postgres';
 
+export const loadIndexData = async (): Promise<IndexData> => {
+  noStore();
+  const { data } = await client.query<{ index: IndexData }>({
+    query: gql`
+      query {
+        index {
+          id
+          text {
+            id
+            item
+          }
+          title
+          image {
+            alt
+            url
+          }
+        }
+      }
+    `,
+  });
+  return data.index;
+};
+
+export const loadPartitions = async (): Promise<PartitionsData> => {
+  noStore();
+  const { data } = await client.query<{ partition: PartitionsData }>({
+    query: gql`
+      query {
+        partition {
+          items {
+            name
+            instrument
+            id
+            sheet {
+              alt
+              url
+              copyright
+            }
+            preview {
+              alt
+              copyright
+              url
+            }
+          }
+          text
+          title
+        }
+      }
+    `,
+  });
+  return data.partition;
+};
+
 export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
+  noStore();
   const { data } = await client.query({
     query: gql`
       query {
@@ -52,7 +115,6 @@ export const loadTrackAudio = async (
     url: string;
   };
 }> => {
-  console.log(`-${name.trim()}-`);
   const { data } = await client.query<{
     audio: { name: string; file: { id: string; url: string } };
   }>({
@@ -86,7 +148,22 @@ export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
   });
   return data.allCategories[0];
 };
-
+export async function loadNouveautes() {
+  noStore();
+  try {
+    const category = 'Nouveautés';
+    const songs: QueryResult<RawTrack> = await sql<RawTrack>`
+      SELECT *
+      FROM songs
+      WHERE category = ${category}
+      LIMIT 4
+      `;
+    return songs.rows;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch the tracks.');
+  }
+}
 export async function loadTracks({
   query,
   currentPage,

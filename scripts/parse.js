@@ -49,8 +49,6 @@ async function seedSongs(client) {
       );
     `;
 
-    console.log(`Created "songs" table`);
-
     // Insert data into the "users" table
     const insertedSongs = await Promise.all(
       [
