@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import { lusitana } from './ui/fonts';
 import { Button } from './ui/Button';
-import { Card } from './ui/Card';
 import { loadIndexData, loadNouveautes } from './lib/data';
 import Image from 'next/image';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
 
 export default async function Page() {
   const data = await loadIndexData();
   const nouveautes = await loadNouveautes();
-  console.log(nouveautes);
   return (
     <main className="flex min-h-screen flex-col gap-10 bg-white">
       <div className="mt-16 flex flex-col gap-10 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
@@ -22,14 +19,15 @@ export default async function Page() {
             height={700}
           />
         </div>
+        {/*présentation*/}
         <div className="flex flex-col gap-6 xl:w-2/3">
           <h1 className={`${lusitana.className} text-2xl font-bold`}>
             {data.title}
           </h1>
           <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
             {data.text[0].item}
-            <br />
-            <br />
+          </p>
+          <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
             {data.text[1].item}
           </p>
           <div>
@@ -41,8 +39,8 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="mt-8 flex grow flex-col gap-6 bg-yellow-400 px-6 md:px-16">
-        <div className="mt-8 flex items-center gap-4">
+      <div className="mt-8 flex grow flex-col gap-6 bg-yellow-400 px-6 py-6 md:px-16 lg:px-24">
+        <div className="flex items-center gap-4">
           <h2 className={`${lusitana.className} text-2xl font-bold`}>
             Nouveautés à la une
           </h2>

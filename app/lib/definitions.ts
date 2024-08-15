@@ -17,6 +17,23 @@ export interface PartitionsData {
   text: string;
   items: Partition[];
 }
+export interface ContactData {
+  title: string;
+  email: string;
+  telephone: string;
+}
+
+export interface Video {
+  id: string;
+  name: string;
+  link: string;
+}
+export interface CollaborationsData {
+  title: string;
+  items: Video[];
+  description: string;
+}
+
 export interface Partition {
   id: string;
   instrument: string;

@@ -2,13 +2,12 @@ import { gql } from '@apollo/client';
 import { client } from './client';
 import {
   Category,
+  CollaborationsData,
+  ContactData,
   IndexData,
-  IndexText,
   MenuItem,
-  Partition,
   PartitionsData,
   RawTrack,
-  Track,
 } from './definitions';
 import { unstable_noStore as noStore } from 'next/cache';
 import { QueryResult, sql } from '@vercel/postgres';
@@ -66,6 +65,21 @@ export const loadPartitions = async (): Promise<PartitionsData> => {
   return data.partition;
 };
 
+export const loadContact = async (): Promise<ContactData> => {
+  noStore();
+  const { data } = await client.query<{ contact: ContactData }>({
+    query: gql`
+      query {
+        contact {
+          email
+          telephone
+          title
+        }
+      }
+    `,
+  });
+  return data.contact;
+};
 export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
   noStore();
   const { data } = await client.query({
@@ -104,6 +118,26 @@ export const loadCategories = async (): Promise<Category[]> => {
     `,
   });
   return data.allCategories;
+};
+
+export const loadCollaborations = async (): Promise<CollaborationsData> => {
+  noStore();
+  const { data } = await client.query<{ collaboration: CollaborationsData }>({
+    query: gql`
+      query {
+        collaboration {
+          title
+          items {
+            id
+            link
+            name
+          }
+          description
+        }
+      }
+    `,
+  });
+  return data.collaboration;
 };
 
 export const loadTrackAudio = async (

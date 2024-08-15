@@ -14,7 +14,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <FooterProvider>
           <Header />
-          {children}
+          <div className="mt-24 bg-blue-500">{children}</div>
           <Footer />
         </FooterProvider>
       </body>

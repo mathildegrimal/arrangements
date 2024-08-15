@@ -11,7 +11,7 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <nav className="w-full bg-white">
+    <nav className="fixed top-0 w-full bg-white">
       <div className="mx-auto justify-between px-4 md:flex md:items-center md:px-8 lg:max-w-7xl">
         <div>
           <div className="flex items-center justify-between py-3 md:block md:py-5">
@@ -47,7 +47,9 @@ const Navbar = ({ menuItems }: { menuItems: MenuItem[] }) => {
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
               {menuItems.map(({ name, slug, submenu }, index) => (
                 <li key={index} className="font-semibold text-red-600">
-                  <Link href={`${slug}`}>{name}</Link>
+                  <Link href={`${slug}`} onClick={() => setNavbar(!navbar)}>
+                    {name}
+                  </Link>
                 </li>
               ))}
             </ul>
