@@ -6,12 +6,9 @@ import { FooterContext } from '@/app/lib/FooterContext';
 export default function Footer() {
   const { playerUrl } = useContext(FooterContext);
   return (
-    <div className="flex w-full justify-center bg-gray-100 py-8" id="player">
-      {playerUrl !== '' ? (
-        <MidiPlayer src={playerUrl} autoplay={false} />
-      ) : (
-        <></>
-      )}
-    </div>
+    <div
+      className="flex w-full justify-center bg-gray-100 py-8"
+      id="player"
+    ></div>
   );
 }
