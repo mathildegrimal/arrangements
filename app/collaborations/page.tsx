@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default async function Page() {
   const collaboration = await loadCollaborations();
   return (
-    <main className="flex min-h-screen flex-col gap-3 bg-white px-6 py-6 md:px-16 lg:gap-20 lg:px-24 lg:py-12">
+    <>
       <div className="flex flex-col gap-10 lg:flex-row">
         <div className="flex flex-col gap-6">
           <Image
@@ -36,6 +36,6 @@ export default async function Page() {
           </div>
         </div>
       </div>
-    </main>
+    </>
   );
 }
