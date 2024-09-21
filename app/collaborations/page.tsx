@@ -10,7 +10,7 @@ export default async function Page() {
       <div className="flex flex-col gap-10 lg:flex-row">
         <div className="flex flex-col gap-6">
           <Image
-            className="h-72 w-full rounded object-cover object-top lg:h-48"
+            className="h-50 w-full rounded object-cover object-top"
             src={'/heads-of.jpg'}
             alt={'fanfare heads of'}
             width={350}
