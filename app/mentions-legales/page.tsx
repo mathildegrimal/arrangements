@@ -1,5 +1,3 @@
-import { loadPartitions } from '../lib/data';
-import { Card } from '../ui/Card';
 import { lusitana } from '../ui/fonts';
 
 export default async function Page() {

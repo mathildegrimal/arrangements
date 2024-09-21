@@ -80,6 +80,7 @@ export const loadContact = async (): Promise<ContactData> => {
   });
   return data.contact;
 };
+
 export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
   noStore();
   const { data } = await client.query({
@@ -137,6 +138,7 @@ export const loadCollaborations = async (): Promise<CollaborationsData> => {
       }
     `,
   });
+  console.log(data.collaboration);
   return data.collaboration;
 };
 
@@ -205,9 +207,9 @@ export async function loadTracks({
 }: {
   query: string;
   currentPage: number;
-  category?: Category;
+  category: string | null;
 }) {
-  const ITEMS_PER_PAGE = 10;
+  const ITEMS_PER_PAGE = 15;
 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -221,26 +223,26 @@ export async function loadTracks({
       filteredSongs = await sql<RawTrack>`
       SELECT *
       FROM songs
-      WHERE category = ${category?.name}
+      WHERE category = ${category}
       ORDER BY name
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
       `;
       count = await sql<{ count: string }>`
       SELECT COUNT(*)
-      FROM songs WHERE category = ${category?.name}
+      FROM songs WHERE category = ${category}
       `;
       if (query) {
         filteredSongs = await sql<RawTrack>`
       SELECT *
       FROM songs
-      WHERE category = ${category?.name}
+      WHERE category = ${category}
       AND (name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`} )
       ORDER BY name
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
       `;
         count = await sql<{ count: string }>`
       SELECT COUNT(*)
-      FROM songs  WHERE category = ${category?.name}
+      FROM songs  WHERE category = ${category}
       AND (name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`})
       `;
       }

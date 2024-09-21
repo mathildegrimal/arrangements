@@ -8,8 +8,8 @@ export default async function Page() {
   const data = await loadIndexData();
   const nouveautes = await loadNouveautes();
   return (
-    <main className="flex min-h-screen flex-col gap-10 bg-white">
-      <div className="mt-16 flex flex-col gap-10 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
+    <main className="flex min-h-screen flex-col bg-white pt-6 lg:pt-12">
+      <div className="flex flex-col px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
         <div className="flex flex-col gap-6">
           <Image
             className="h-80 w-full rounded object-cover object-top"
@@ -17,6 +17,7 @@ export default async function Page() {
             alt={data.image.alt}
             width={550}
             height={700}
+            priority
           />
         </div>
         {/*présentation*/}

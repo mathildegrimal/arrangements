@@ -5,17 +5,9 @@ import {
   InboxIcon,
   ArrowRightIcon,
 } from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RxDownload } from 'react-icons/rx';
-
-const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
-};
 
 export function Card({
   title,

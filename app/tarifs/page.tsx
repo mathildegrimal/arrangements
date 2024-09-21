@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import { lusitana } from '../ui/fonts';
+
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col gap-6 bg-white">
-      <div className="mt-16 flex flex-col gap-6 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
+    <main className="lg:gap- flex min-h-screen flex-col gap-10 bg-white px-6 py-6 md:px-16 lg:px-24 lg:py-12">
+      <div className="flex flex-col gap-6 xl:flex-row">
         <div className="flex flex-col gap-6">
           <Image
-            className="h-52 w-full rounded object-cover object-top"
+            className="h-72 w-full rounded object-cover object-top"
             src={'/pexels-pixabay-45243.jpg'}
             alt={'saxo et partition'}
             width={390}
@@ -22,18 +23,18 @@ export default function Page() {
           </p>
           <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
             Ce montant comprend :
-            <ul>
-              <li>- l&apos;envoi des partitions au format PDF</li>
-              <li>- un conducteur et un fichier midi sur demande</li>
-              <li>
-                - toute adaptation de l&apos;arrangement selon votre demande
-                (changement de tonalité, ajout ou suppression de voix etc...)
-              </li>
-            </ul>
           </p>
+          <ul className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
+            <li>- l&apos;envoi des partitions au format PDF</li>
+            <li>- un conducteur et un fichier midi sur demande</li>
+            <li>
+              - toute adaptation de l&apos;arrangement selon votre demande
+              (changement de tonalité, ajout ou suppression de voix etc...)
+            </li>
+          </ul>
         </div>
       </div>
-      <div className="flex flex-col gap-6 px-6 md:px-16 lg:px-24">
+      <div className="flex flex-col gap-6">
         <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
           Pour tout morceau ne figurant pas dans cette liste, me consulter. Le
           tarif dépendra du travail à fournir mais se situe généralement entre
@@ -41,33 +42,33 @@ export default function Page() {
         </p>
         <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
           Le montant comprendra :
-          <ul>
-            <li>- le temps passé pour l&apos;écriture de l&apos;arrangement</li>
-            <li>
-              - l&apos;envoi des partitions au format PDF + un conducteur et un
-              fichier midi sur demande
-            </li>
-            <li>
-              - toute adaptation de l&apos;arrangement selon votre demande
-              (changement de tonalité, ajout ou suppression de voix etc...)
-            </li>
-          </ul>
         </p>
+        <ul className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
+          <li>- le temps passé pour l&apos;écriture de l&apos;arrangement</li>
+          <li>
+            - l&apos;envoi des partitions au format PDF + un conducteur et un
+            fichier midi sur demande
+          </li>
+          <li>
+            - toute adaptation de l&apos;arrangement selon votre demande
+            (changement de tonalité, ajout ou suppression de voix etc...)
+          </li>
+        </ul>
         <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
           Possiblité de tarif dégressif en cas de commande de 3 morceaux ou
           plus.
         </p>
         <p className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
           3 modes de paiement acceptés (paiement à la commande) :
-          <ul>
-            <li>- Chèque</li>
-            <li>- Virement</li>
-            <li>
-              - Paypal (dans ce cas merci de cocher &quot;envoyer à un
-              proche&quot;).
-            </li>
-          </ul>
         </p>
+        <ul className={`md:text-1xl text-lg text-gray-800 md:leading-normal`}>
+          <li>- Chèque</li>
+          <li>- Virement</li>
+          <li>
+            - Paypal (dans ce cas merci de cocher &quot;envoyer à un
+            proche&quot;).
+          </li>
+        </ul>
       </div>
     </main>
   );
