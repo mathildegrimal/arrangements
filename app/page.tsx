@@ -57,7 +57,7 @@ export default async function Page() {
         </div>
         <div>
           <Button className="mt-4 w-auto justify-center">
-            <Link href={`/catalogue?categorie=nouveautes`}>
+            <Link href={`/catalogue?categorie=Nouveautés`}>
               Toutes les nouveautés
             </Link>
           </Button>
