@@ -12,11 +12,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <FooterProvider>
-          <Header />
-          <div className="mt-24 bg-blue-500">{children}</div>
-          <Footer />
-        </FooterProvider>
+        <Header />
+        <div className="mt-24">{children}</div>
+        <Footer />
       </body>
     </html>
   );

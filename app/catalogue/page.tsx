@@ -22,9 +22,9 @@ export default async function Page({
   });
 
   return (
-    <>
+    <main className="flex min-h-screen flex-col bg-white px-12 py-6 md:px-16 lg:px-24 lg:pt-12">
       <div className="flex flex h-full w-full flex-col gap-10">
-        <div className="flex h-full w-full flex-col gap-6 md:flex-row">
+        <div className="flex h-full w-full flex-col gap-10 md:flex-row">
           <CategoriesMenu categories={categories} activeCategory={categorie} />
           <div className="flex flex h-full w-full flex-col gap-8 md:w-3/5 lg:w-8/12 xl:w-4/5">
             <Search placeholder="Rechercher des morceaux..." />
