@@ -6,11 +6,11 @@ import Image from 'next/image';
 export default async function Page() {
   const collaboration = await loadCollaborations();
   return (
-    <main className="flex min-h-screen flex-col gap-3 bg-white">
-      <div className="mt-16 flex flex-col gap-10 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
+    <main className="flex min-h-screen flex-col gap-3 bg-white px-6 py-6 md:px-16 lg:gap-20 lg:px-24 lg:py-12">
+      <div className="flex flex-col gap-10 lg:flex-row">
         <div className="flex flex-col gap-6">
           <Image
-            className="h-48 w-full rounded object-cover object-top"
+            className="h-72 w-full rounded object-cover object-top lg:h-48"
             src={'/heads-of.jpg'}
             alt={'fanfare heads of'}
             width={350}
@@ -27,7 +27,7 @@ export default async function Page() {
           </p>
         </div>
       </div>
-      <div className="mt-4 flex flex-col gap-10 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
+      <div className="mt-4 flex flex-col gap-10 xl:flex-row">
         <div className="flex flex-col gap-6">
           <div className="mt-6 flex grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
             {collaboration.items.map(({ id, link, name }) => (

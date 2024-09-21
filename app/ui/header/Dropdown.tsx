@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { MenuItem } from '@/app/lib/definitions';
+
 const Dropdown = ({
   name,
   dropdownItems,
@@ -15,7 +16,7 @@ const Dropdown = ({
       <label tabIndex={0} className="">
         <Link href={slug}>{name}</Link>
       </label>
-      <ul className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
+      <ul className="menu dropdown-content rounded-box bg-base-100 z-[1] w-52 p-2 shadow">
         {dropdownItems.map(({ name, slug: menuItemSlug }, index) => (
           <li key={index}>
             <Link href={`${slug}${menuItemSlug}`}>{name}</Link>
