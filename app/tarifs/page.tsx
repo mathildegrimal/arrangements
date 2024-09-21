@@ -3,8 +3,8 @@ import { lusitana } from '../ui/fonts';
 
 export default function Page() {
   return (
-    <main className="lg:gap- flex min-h-screen flex-col gap-10 bg-white px-6 py-6 md:px-16 lg:px-24 lg:py-12">
-      <div className="flex flex-col gap-6 xl:flex-row">
+    <>
+      <div className="flex flex-col gap-10 xl:flex-row">
         <div className="flex flex-col gap-6">
           <Image
             className="h-72 w-full rounded object-cover object-top"
