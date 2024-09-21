@@ -5,10 +5,8 @@ const {
   nouveautes,
   bandas,
   medleys,
-  generiques,
   divers,
-  tradi,
-} = require('./songs');
+} = require('./new_songs');
 
 function parseSongs(category, array) {
   const result = [];
@@ -34,8 +32,6 @@ async function seedSongs(client) {
     const varieteFrSongs = parseSongs('Variété française', varieteFr);
     const bandasSong = parseSongs('Banda / Peña', bandas);
     const diversSongs = parseSongs('Divers', divers);
-    const generiquesSongs = parseSongs('Génériques / Thèmes', generiques);
-    const tradiSongs = parseSongs('Traditionnel / Balkans / Paso doble', tradi);
     const nouveautesSongs = parseSongs('Nouveautés', nouveautes);
     const medleySongs = parseSongs('Medleys', medleys);
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
@@ -58,8 +54,6 @@ async function seedSongs(client) {
         ...varieteFrSongs,
         ...bandasSong,
         ...diversSongs,
-        ...generiquesSongs,
-        ...tradiSongs,
         ...nouveautesSongs,
         ...medleySongs,
       ].map(async (song) => {

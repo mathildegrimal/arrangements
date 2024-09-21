@@ -1,14 +1,19 @@
 'use client';
 import React, { useContext } from 'react';
-import MidiPlayer from 'react-midi-player';
 
-import { FooterContext } from '@/app/lib/FooterContext';
+import Link from 'next/link';
+import { lusitana } from '../fonts';
 export default function Footer() {
-  const { playerUrl } = useContext(FooterContext);
   return (
     <div
-      className="flex w-full justify-center bg-gray-100 py-8"
-      id="player"
-    ></div>
+      className={`${lusitana.className} flex w-full items-center justify-around bg-gray-100 py-8 text-red-600`}
+    >
+      <div className="flex align-middle">
+        © Ivan Mur - Tous droits réservés
+      </div>
+      <div className="flex flex-col gap-2 hover:font-bold">
+        <Link href="mentions-legales">Mentions légales</Link>
+      </div>
+    </div>
   );
 }

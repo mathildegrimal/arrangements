@@ -6,7 +6,7 @@ export default function Page() {
       <div className="mt-16 flex flex-col gap-6 px-6 md:px-16 lg:gap-20 lg:px-24 xl:flex-row">
         <div className="flex flex-col gap-6">
           <Image
-            className="h-50 w-full rounded object-cover object-top"
+            className="h-52 w-full rounded object-cover object-top"
             src={'/pexels-pixabay-45243.jpg'}
             alt={'saxo et partition'}
             width={390}
