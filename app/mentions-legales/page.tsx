@@ -34,7 +34,7 @@ export default async function Page() {
       <p className={`text-lg text-gray-800 md:text-xl md:leading-normal`}>
         Ivan Mur est propriétaire des droits de propriété intellectuelle ou
         détient les droits d’usage sur tous les éléments accessibles sur le
-        site : les textes, les images, les extraits de partitions, les fichiers midi. La
+        site : les textes, les images, les extraits de partitions, les fichiers midi, les vidéos. La
         reproduction, représentation, modification, publication, adaptation de
         tout ou partie des éléments du site, quel que soit le moyen ou le
         procédé utilisé, est interdite, sauf autorisation écrite préalable de
