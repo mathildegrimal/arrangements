@@ -12,7 +12,7 @@ export default async function Page() {
       <p className={`text-lg text-gray-800 md:text-xl md:leading-normal`}>
         En vertu de l&apos;article 6 de la loi n° 2004-575 du 21 juin 2004 pour
         la confiance dans l&apos;économie numérique, il est précisé aux
-        utilisateurs du site www.arrangements-musicaux.com l&apos;identité des
+        utilisateurs du site http://www.partitions-fanfares-ivan-mur.com/ l&apos;identité des
         différents intervenants dans le cadre de sa réalisation et de son suivi.
       </p>
       <p className={`text-lg text-gray-800 md:text-xl md:leading-normal`}>
@@ -50,14 +50,14 @@ export default async function Page() {
         Cookies et traceurs
       </h3>
       <p className={`text-lg text-gray-800 md:text-xl md:leading-normal`}>
-        Le site internet www.arrangements-musicaux.com n&apos;utilise pas de
+        Le site internet www.partitions-fanfares-ivan-mur.com n&apos;utilise pas de
         cookies.
       </p>
       <h3 className={`${lusitana.className} text-xl font-bold`}>
         Données personnelles
       </h3>
       <p className={`text-lg text-gray-800 md:text-xl md:leading-normal`}>
-        Le site internet www.arrangements-musicaux.com ne collecte aucune donnée
+        Le site internet www.partitions-fanfares-ivan-mur.com ne collecte aucune donnée
         personnelle de l&apos;utilisateur.
       </p>
     </>
