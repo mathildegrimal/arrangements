@@ -192,6 +192,7 @@ export async function loadNouveautes() {
       SELECT *
       FROM songs
       WHERE category = ${category}
+      ORDER BY creation_date DESC
       LIMIT 4
       `;
     return songs.rows;
