@@ -45,7 +45,7 @@ export default async function Page() {
             Nouveautés à la une
           </h2>
         </div>
-        <div className="mt-6 flex flex-col gap-10 md:grid md:grid-cols-4">
+        <div className="mt-6 flex flex-col gap-10 md:grid md:grid-cols-5">
           {nouveautes.map(({ id, author, name }) => (
             <div className="flex flex-col gap-2 rounded bg-white" key={id}>
               <div className="flex flex-col gap-2 p-6">
