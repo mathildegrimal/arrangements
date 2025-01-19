@@ -17,9 +17,6 @@ export default function PlayerProvider({
 }) {
   const [playerUrl, setPlayerUrl] = useState('');
 
-  useEffect(() => {
-    console.log(playerUrl);
-  }, [playerUrl]);
   return (
     <PlayerContext.Provider value={{ playerUrl, setPlayerUrl }}>
       {children}
