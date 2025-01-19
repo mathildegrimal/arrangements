@@ -15,7 +15,7 @@ export default function RootLayout({
         <Header />
         <div className="mt-32">{children}</div>
         <Footer />
-        <Analytics />
+        <Analytics mode="production" />
       </body>
     </html>
   );

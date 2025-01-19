@@ -138,7 +138,6 @@ export const loadCollaborations = async (): Promise<CollaborationsData> => {
       }
     `,
   });
-  console.log(data.collaboration);
   return data.collaboration;
 };
 
@@ -193,7 +192,7 @@ export async function loadNouveautes() {
       FROM songs
       WHERE category = ${category}
       ORDER BY creation_date DESC
-      LIMIT 4
+      LIMIT 5
       `;
     return songs.rows;
   } catch (error) {
