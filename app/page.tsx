@@ -40,17 +40,6 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="mt-4 flex grow flex-col gap-6 px-6 py-4 md:px-16 lg:px-24 lg:py-4">
-        <div className="flex items-center gap-3 rounded-lg bg-red-600 px-4 py-4 text-white">
-          <div className="flex h-5 w-5 items-center">
-            <AiFillWarning />
-          </div>
-          <p>
-            Attention : changement de coordonnées bancaires, me consulter avant
-            toute commande afin d&apos;avoir le nouveau RIB
-          </p>
-        </div>
-      </div>
       <div className="mt-8 flex grow flex-col gap-6 bg-yellow-400 px-6 py-6 md:px-16 lg:px-24 lg:py-12">
         <div className="flex items-center gap-4">
           <h2 className={`${lusitana.className} text-2xl font-bold`}>
