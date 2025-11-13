@@ -183,6 +183,7 @@ export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
   });
   return data.allCategories[0];
 };
+
 export async function loadNouveautes() {
   noStore();
   try {
@@ -200,6 +201,7 @@ export async function loadNouveautes() {
     throw new Error('Failed to fetch the tracks.');
   }
 }
+
 export async function loadTracks({
   query,
   currentPage,
@@ -250,24 +252,29 @@ export async function loadTracks({
       filteredSongs = await sql<RawTrack>`
       SELECT *
       FROM songs
+      WHERE NOT category = 'Nouveautés'
       ORDER BY name
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
       `;
       count = await sql<{ count: string }>`
       SELECT COUNT(*)
       FROM songs
+      WHERE NOT category = 'Nouveautés'
       `;
       if (query) {
         filteredSongs = await sql<RawTrack>`
       SELECT *
       FROM songs
       WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      AND NOT category = 'Nouveautés'
       ORDER BY name
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
       `;
         count = await sql<{ count: string }>`
       SELECT COUNT(*)
-      FROM songs  WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      FROM songs
+      WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      AND NOT category = 'Nouveautés'
       `;
       }
     }

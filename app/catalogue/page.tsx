@@ -25,7 +25,10 @@ export default async function Page({
     <>
       <div className="flex flex h-full w-full flex-col gap-10">
         <div className="flex h-full w-full flex-col gap-6 md:flex-row">
-          <CategoriesMenu categories={categories} activeCategory={categorie} />
+          <CategoriesMenu
+            categories={categories.filter((c) => c.name !== 'Nouveautés')}
+            activeCategory={categorie}
+          />
           <div className="flex flex h-full w-full flex-col gap-8 md:w-3/5 lg:w-8/12 xl:w-4/5">
             <Search placeholder="Rechercher des morceaux..." />
             <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
