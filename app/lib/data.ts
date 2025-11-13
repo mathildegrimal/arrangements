@@ -265,7 +265,7 @@ export async function loadTracks({
         filteredSongs = await sql<RawTrack>`
       SELECT *
       FROM songs
-      WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      WHERE (name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`})
       AND NOT category = 'Nouveautés'
       ORDER BY name
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
@@ -273,7 +273,7 @@ export async function loadTracks({
         count = await sql<{ count: string }>`
       SELECT COUNT(*)
       FROM songs
-      WHERE name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`}
+      WHERE (name ILIKE ${`%${query}%`} OR author ILIKE ${`%${query}%`})
       AND NOT category = 'Nouveautés'
       `;
       }
