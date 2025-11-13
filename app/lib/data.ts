@@ -12,7 +12,7 @@ import {
 import { unstable_noStore as noStore } from 'next/cache';
 import { QueryResult, sql } from '@vercel/postgres';
 
-export const loadIndexData = async (): Promise<IndexData> => {
+export const loadIndexData = async (): Promise<IndexData | null> => {
   noStore();
   const { data } = await client.query<{ index: IndexData }>({
     query: gql`
@@ -32,10 +32,10 @@ export const loadIndexData = async (): Promise<IndexData> => {
       }
     `,
   });
-  return data.index;
+  return data?.index ?? null;
 };
 
-export const loadPartitions = async (): Promise<PartitionsData> => {
+export const loadPartitions = async (): Promise<PartitionsData | null> => {
   noStore();
   const { data } = await client.query<{ partition: PartitionsData }>({
     query: gql`
@@ -62,10 +62,10 @@ export const loadPartitions = async (): Promise<PartitionsData> => {
       }
     `,
   });
-  return data.partition;
+  return data?.partition ?? null;
 };
 
-export const loadContact = async (): Promise<ContactData> => {
+export const loadContact = async (): Promise<ContactData | null> => {
   noStore();
   const { data } = await client.query<{ contact: ContactData }>({
     query: gql`
@@ -78,12 +78,12 @@ export const loadContact = async (): Promise<ContactData> => {
       }
     `,
   });
-  return data.contact;
+  return data?.contact ?? null;
 };
 
 export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
   noStore();
-  const { data } = await client.query({
+  const { data } = await client.query<{ allMenus: MenuItem[] }>({
     query: gql`
       query {
         allMenus(orderBy: order_ASC) {
@@ -101,7 +101,7 @@ export const loadMenuItems = async (): Promise<{ allMenus: MenuItem[] }> => {
       }
     `,
   });
-  return data;
+  return { allMenus: data?.allMenus ?? [] };
 };
 
 export const loadCategories = async (): Promise<Category[]> => {
@@ -118,28 +118,29 @@ export const loadCategories = async (): Promise<Category[]> => {
       }
     `,
   });
-  return data.allCategories;
+  return data?.allCategories ?? [];
 };
 
-export const loadCollaborations = async (): Promise<CollaborationsData> => {
-  noStore();
-  const { data } = await client.query<{ collaboration: CollaborationsData }>({
-    query: gql`
-      query {
-        collaboration {
-          title
-          items {
-            id
-            link
-            name
+export const loadCollaborations =
+  async (): Promise<CollaborationsData | null> => {
+    noStore();
+    const { data } = await client.query<{ collaboration: CollaborationsData }>({
+      query: gql`
+        query {
+          collaboration {
+            title
+            items {
+              id
+              link
+              name
+            }
+            description
           }
-          description
         }
-      }
-    `,
-  });
-  return data.collaboration;
-};
+      `,
+    });
+    return data?.collaboration ?? null;
+  };
 
 export const loadTrackAudio = async (
   name: string,
@@ -149,7 +150,7 @@ export const loadTrackAudio = async (
     id: string;
     url: string;
   };
-}> => {
+} | null> => {
   const { data } = await client.query<{
     audio: { name: string; file: { id: string; url: string } };
   }>({
@@ -165,10 +166,12 @@ export const loadTrackAudio = async (
       }
     `,
   });
-  return data.audio;
+  return data?.audio ?? null;
 };
 
-export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
+export const loadCategoryBySlug = async (
+  slug: string,
+): Promise<Category | null> => {
   noStore();
   const { data } = await client.query<{ allCategories: Category[] }>({
     query: gql`
@@ -181,7 +184,7 @@ export const loadCategoryBySlug = async (slug: string): Promise<Category> => {
       }
     `,
   });
-  return data.allCategories[0];
+  return data?.allCategories?.[0] ?? null;
 };
 
 export async function loadNouveautes() {

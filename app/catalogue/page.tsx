@@ -4,22 +4,39 @@ import CategoriesMenu from '@/app/ui/CategoriesMenu';
 import Pagination from '@/app/ui/Pagination';
 import { Track as TrackLine } from '../ui/Track';
 import PlayerProvider from '../hooks/PlayerProvider';
+import { AiFillWarning } from 'react-icons/ai';
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { query?: string; page?: string; categorie?: string };
+  searchParams: Promise<{ query?: string; page?: string; categorie?: string }>;
 }) {
   const categories = await loadCategories();
+  const params = await searchParams;
 
-  const categorie = searchParams?.categorie || 'Toutes';
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  const categorie = params?.categorie || 'Toutes';
+  const query = params?.query || '';
+  const currentPage = Number(params?.page) || 1;
   const { tracks, totalPages } = await loadTracks({
     query,
     currentPage,
     category: categorie !== 'Toutes' ? categorie : null,
   });
+
+  if (!tracks || !totalPages) {
+    return (
+      <main className="flex min-h-screen flex-col bg-white pt-6 lg:pt-12">
+        <div className="mx-auto max-w-4xl px-6 md:px-16 lg:px-24">
+          <div className="flex items-center gap-3 rounded bg-yellow-50 p-6">
+            <AiFillWarning className="h-6 w-6 text-yellow-800" />
+            <p className="text-yellow-800">
+              Le contenu est temporairement indisponible.
+            </p>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <>

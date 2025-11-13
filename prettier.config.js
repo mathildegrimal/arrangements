@@ -1,6 +1,5 @@
-const styleguide = require('@vercel/style-guide/prettier');
-
+// Minimal Prettier config after removing @vercel/style-guide.
+// Keep the Tailwind plugin and provide a safe default plugin array.
 module.exports = {
-  ...styleguide,
-  plugins: [...styleguide.plugins, 'prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-tailwindcss'],
 };

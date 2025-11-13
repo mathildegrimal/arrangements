@@ -1,8 +1,13 @@
 'use client';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 import { useContext, useEffect, useState } from 'react';
-import MidiPlayer from 'react-midi-player';
+import dynamic from 'next/dynamic';
 import { PlayerContext } from '../hooks/PlayerProvider';
+
+// Load react-midi-player only on the client to avoid server-side bundling of native modules
+const MidiPlayer: any = dynamic(() => import('react-midi-player').then((m) => m.default || m), {
+  ssr: false,
+});
 
 export function AudioButton({ trackUrl }: { trackUrl: string }) {
   const { setPlayerUrl, playerUrl } = useContext(PlayerContext);
